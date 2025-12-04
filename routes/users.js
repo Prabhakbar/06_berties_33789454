@@ -10,7 +10,7 @@ const redirectLogin = (req, res, next) => {
 
         // If on university server, redirect there
         if (req.headers.host.includes("doc.gold.ac.uk")) {
-            return res.redirect("/usr/442/users/login");
+            return res.redirect("/usr/435/users/login");
         }
 
         // Otherwise you're on localhost
