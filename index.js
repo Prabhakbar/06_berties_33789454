@@ -5,9 +5,15 @@ const path = require('path')
 var mysql = require('mysql2');
 var session = require ('express-session')
 
+const expressSanitizer = require('express-sanitizer');
+
 // Create the express application object
 const app = express()
 const port = 8000
+
+
+// Create an input sanitizer
+app.use(expressSanitizer());
 
 // Tell Express that we want to use EJS as the templating engine
 app.set('view engine', 'ejs')
@@ -54,5 +60,14 @@ app.use('/users', usersRoutes)
 const booksRoutes = require('./routes/books')
 app.use('/books', booksRoutes)
 
+const weatherRoutes = require('./routes/weather')
+app.use('/weather', weatherRoutes)
+
+const apiRoutes = require('./routes/api')
+app.use('/api', apiRoutes)
+
 // Start the web app listening
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+
+
+

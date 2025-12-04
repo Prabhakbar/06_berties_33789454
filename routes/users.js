@@ -5,6 +5,8 @@ const router = express.Router()
 const bcrypt = require('bcrypt')
 const saltRounds = 10
 
+const { check, validationResult } = require('express-validator');
+
 const redirectLogin = (req, res, next) => {
     if (!req.session.userId) {
 
@@ -23,7 +25,17 @@ router.get('/register', function (req, res, next) {
     res.render('register.ejs')
 })
 
-router.post('/registered', function (req, res, next) {
+router.post('/registered', 
+        [check('email').isEmail(), 
+     check('username').isLength({ min: 5, max: 20})],
+     check('password').isLength({ min: 8 })  
+     .matches(/d/) ,
+    function (req, res, next) {
+const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        res.render('./register')
+    }
+    else { 
     // saving data in database
     const plainPassword = req.body.password;
 
@@ -50,7 +62,7 @@ router.post('/registered', function (req, res, next) {
                 return next(err); // Pass the database error along
             }
 
-            let response_message = 'Hello '+ req.body.first + ' '+ req.body.last +' you are now registered!  We will send an email to you at ' + req.body.email
+            let response_message = 'Hello '+ req.sanitize(req.body.first) + ' '+ req.body.last +' you are now registered!  We will send an email to you at ' + req.body.email
             
             response_message += ' Your password is: '+ req.body.password +' and your hashed password is: '+ hashedPassword
 
@@ -59,7 +71,7 @@ router.post('/registered', function (req, res, next) {
 
         });
     });
-    
+}
 });
 
 router.get('/list', redirectLogin, function (req, res, next) {
