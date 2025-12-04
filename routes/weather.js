@@ -19,16 +19,16 @@ router.get('/', (req, res, next) => {
       if (weather !== undefined && weather.main !== undefined) {
 
         var wmsg = 
-          'It is ' + weather.main.temp +
-          ' degrees in ' + weather.name +
-          '! <br> The humidity now is: ' + weather.main.humidity +
-          '<br>Wind speed: ' + weather.wind.speed +
-          '<br>Description: ' + weather.weather[0].description +
-          '<br><br>' +
-          '<form method="GET" action="/weather">' +
-          'Check another city: <input type="text" name="city" />' +
-          '<button type="submit">Search</button>' +
-          '</form>';
+          `<div style="font-family: Verdana, sans-serif; color: #333;">
+            It is <span style="color: #FF5733; font-weight: bold;">${weather.main.temp}°C</span> in <span style="color: #007BFF;">${weather.name}</span>!<br>
+            The humidity now is: <span style="color: #28A745;">${weather.main.humidity}%</span><br>
+            Wind speed: <span style="color: #17A2B8;">${weather.wind.speed} m/s</span><br>
+            Description: <span style="color: #6C757D;">${weather.weather[0].description}</span><br><br>
+            <form method="GET" action="/weather">
+              Check another city: <input type="text" name="city" />
+              <button type="submit">Search</button>
+            </form>
+          </div>`;
 
         res.send(wmsg);
 
