@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Login to <%= shopData.shopName %></title>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+  </head>
+  <body>
+    <h1>Login to <%= shopData.shopName %></h1> 
+
+    <form method="POST" action="/users/loggedIn">
+      <p>
+        <label for="username">Username or Email:</label>
+        <input type="text" id="username" name="username" required>
+      </p>
+
+      <p>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+      </p>
+      
+      <p>
+        <input type="submit" value="Log In">
+      </p>
+    </form>
+
+    <hr>
+    
+    <p>Don't have an account? <a href="/users/register">Register here</a></p>
+    <p><a href="/">Back to Home</a></p>
+  </body>
+</html>

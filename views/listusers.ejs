@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Registered Users List</title>
+    <link rel="stylesheet"  type="text/css" href="/main.css" /> 
+</head>
+<body>
+    <div class="container">
+        <h1>Registered Users</h1>
+        <h2>Here are the users registered with us: </h2>
+        
+        <ul class="user-list">
+            <% if (users && users.length > 0) { %>
+                <% users.forEach(function(user) { %>
+                    <li class="user-item">
+                        <span class="user-name">
+                            Name: **<%= user.first_name %> <%= user.last_name %>**
+                        </span>
+                        <span class="user-username">
+                            | Username: <%= user.username %> 
+                        </span>
+                        <span class="user-email">
+                            | Email: <%= user.email %>
+                        </span>
+                    </li>
+                <% }); %>
+            <% } else { %>
+                <li class="user-item">
+                    <span class="user-name">No users currently registered.</span>
+                </li>
+            <% } %>
+        </ul>
+        
+        <p><a href="/">Back to Home</a></p>
+    </div>
+</body>
+</html>
